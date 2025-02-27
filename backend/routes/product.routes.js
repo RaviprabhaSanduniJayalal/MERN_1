@@ -2,7 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import Product from '../models/product.model.js';
 import e from 'express';
-import { getProducts } from '../controllers/product.controller.js';
+import { createProduct, getProducts } from '../controllers/product.controller.js';
 
 
 const router = express.Router();
@@ -32,24 +32,7 @@ router.put("/:id",async(req,res)=>{
 });
 
 
-router.post("/",async(req,res)=>{
-    const product=req.body; //user will send the product data
-
-    if(!product.name || !product.price || !product.image){
-        return res.status(400).json({success:false, message:"Please enter all fields"});
-    }
-
-    const newProduct = new Product(product)
-
-        try{
-            await newProduct.save();
-            res.status(201).json({success:true, data:newProduct});
-        }catch(error){
-            console.error("Error in create product:",error.message);
-            res.status(500).json({success:false, message:"Server Error"});
-        }
-    
-});
+router.post("/",createProduct);
 
 router.delete("/:id",async(req,res)=>{
     const {id}=req.params;
