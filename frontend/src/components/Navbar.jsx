@@ -9,11 +9,13 @@ import {
 
 import { PlusSquareIcon } from "@chakra-ui/icons";
 import { FaShoppingCart } from "react-icons/fa";
+import { IoMoon } from "react-icons/io5";
+import { LuSun } from "react-icons/lu";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const { toggleColorMode } = useColorMode(); // ✅ Fix colorMode
+  const { colorMode, toggleColorMode } = useColorMode(); // ✅ Fix colorMode
 
   return (
     <Container maxW={"1140px"} px="4">
@@ -44,9 +46,15 @@ const Navbar = () => {
             </Button>
           </Link>
 
-          <Button onClick={toggleColorMode}> {/* ✅ Fix onClick */}
-            <FaShoppingCart fontSize={20} />
+          <Button onClick={toggleColorMode}> 
+            {colorMode === "light" ? <IoMoon size="20" /> : <LuSun size="20" />}
           </Button>
+
+          <Link to={"/cart"}>
+            <Button>
+              <FaShoppingCart fontSize={20} />
+            </Button>
+          </Link>
         </HStack>
       </Flex>
     </Container>
