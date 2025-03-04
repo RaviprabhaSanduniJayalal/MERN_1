@@ -40,12 +40,13 @@ const HomePage = () => {
           ))}
         </SimpleGrid>
       ) : (
-        <Text
-          fontSize='20px'
-          textAlign='center'
-          fontWeight='bold'
-          color='gray.500'
-        >
+        products.length === 0 ? (
+          <Text
+            fontSize='20px'
+            textAlign='center'
+            fontWeight='bold'
+            color='gray.500'
+          >
             No products available {""}
             <Link to='/create'>
               <Text as='span' color='blue.500' _hover={{textDecoration: 'underline'}}>
@@ -53,7 +54,7 @@ const HomePage = () => {
               </Text>
             </Link>
           </Text>
-        
+        ) : null
       )}
       </VStack>
     </Container>
